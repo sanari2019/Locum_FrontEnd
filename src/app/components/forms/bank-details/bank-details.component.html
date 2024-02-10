@@ -1,0 +1,71 @@
+<form novalidate (ngSubmit)="save()" [formGroup]="secondFormGroup" class="mat-form">
+    <div class="flex flex-wrap -mx-3 mb-3">
+      <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+          Bank Name
+        </label>
+        <input
+          type="text" formControlName="bname"
+          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          placeholder="E.G, Guaranty Trust Bank"
+        />
+      </div>
+      <div class="w-full md:w-1/2 px-3">
+        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+          Account Holder's Name
+        </label>
+        <input
+          type="text" formControlName="hname"
+          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          placeholder="E.G. Anari O. Samuel"
+        />
+      </div>
+    </div>
+    <div class="flex flex-wrap -mx-3 mb-3">
+      <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+          Account Number
+        </label>
+        <input
+          type="text" formControlName="anumber"
+          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          placeholder="E.G. 0111234557"
+        />
+      </div>
+      <div class="w-full md:w-1/2 px-3">
+        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+          Routing/ Sort Number
+        </label>
+        <input
+          type="text" formControlName="rnumber"
+          class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          placeholder="Sort Code (if applicable)"
+        />
+      </div>
+    </div>
+
+    <div>
+      <label class="inline-flex items-center cursor-pointer">
+        <input
+          id="customCheckLogin"
+          type="checkbox" formControlName="agreeTerms"
+          class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
+        />
+        <span class="ml-2 text-sm font-semibold text-blueGray-600">
+          I agree with the
+          <a href="javascript:void(0)" class="text-red-600">
+            Privacy Policy
+          </a>
+        </span>
+      </label>
+    </div>
+
+    <div class="text-center mt-6">
+      <button [disabled]="!secondFormGroup.valid"
+        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+        type="button"
+      >
+        Create Account
+      </button>
+    </div>
+  </form>

@@ -1,0 +1,142 @@
+
+<div class="container mx-auto px-4">
+    <div class="flex content-center items-center justify-center">
+      <div class="w-full px-4">
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-200 border-0"
+        >
+          <div class="rounded-t mb-0 px-6 py-6">
+            <div class="text-center mb-3">
+              <h6 class="text-slate-500 text-sm font-bold">Make a Request</h6>
+            </div>
+            <hr class="mt-6 border-b-1 border-slate-300" />
+          </div>
+          
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+            <div class="text-slate-400 text-center mb-3 font-bold">              
+              <!--<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+                {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+              </button>-->
+             
+
+            </div>
+            <mat-horizontal-stepper  [linear]="isLinear" #stepper>
+              <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                  <ng-template matStepLabel>Fill out your name</ng-template>
+                  <mat-form-field>
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="firstCtrl" required>
+                      <mat-option *ngFor="let department of departments" [value]="department.id">
+                        {{ department.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field><br>
+                  <mat-form-field>
+                    <mat-label>Shift</mat-label>
+                    <mat-select formControlName="firstCtrl2" required>
+                      <mat-option *ngFor="let shift of shifts" [value]="shift.id">
+                        {{ shift.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperNext  (click)="next()">Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup">
+                <form [formGroup]="secondFormGroup">
+                  <ng-template matStepLabel>Fill out Patient Details</ng-template>
+                
+                  <mat-form-field>
+                    <input matInput placeholder="First Name" formControlName="first_Name" required>
+                  </mat-form-field>
+                
+                  <mat-form-field>
+                    <input matInput placeholder="Last Name" formControlName="last_Name" required>
+                  </mat-form-field>
+                
+                  <mat-form-field>
+                    <input matInput placeholder="UHID" formControlName="uhid" required>
+                  </mat-form-field>
+                
+                  <!-- Additional fields based on your Patient model -->
+                  <!-- Add more mat-form-fields for additional patient information -->
+                
+                  
+                
+                  
+                
+                  <button mat-button (click)="add()">Validate</button>
+                </form>
+                <!-- Table to show items -->
+              
+
+                <table class="blueTable">
+                  <thead>
+                  <tr>
+                    <th>Patient Name</th>
+                    <th>UHID</th>
+                    <!--<th>Validated</th>-->
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tfoot>
+                  <tr>
+                  <td colspan="4">
+                  <div class="links"><a href="#">&laquo;</a> <a class="active" href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">&raquo;</a></div>
+                  </td>
+                  </tr>
+                  </tfoot>
+                  <tbody>
+                  <tr *ngFor="let patient of validatedPatients">
+                  <td>{{ patient.first_Name }} {{ patient.last_Name }}</td>
+                  <td>{{ patient.uhid }}</td>
+                  <!--<td>
+                    <ng-container *ngIf="patient.is_Validated; else notValidated">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                      </svg>                  
+                    </ng-container>
+                    <ng-template #notValidated>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                      </svg>                      
+                    </ng-template> 
+                  </td>-->
+                  <td>
+                    <a (click)="onDelete(patient)"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                    </svg> </a>
+                  </td>
+                  
+                  </tr>
+                  <!--<tr *ngFor="let item of items">
+                      <td>{{ item.firstName }} {{ patient.lastName }}</td>
+                      <td>{{ item.uhid }}</td>
+                      <td>{{ item.uhid }}</td>
+                    </tr>-->
+                  </tbody>
+                </table>
+
+                
+                  <div class="text-center mt-6" *ngIf="validatedPatients.length > 0">
+                    <button (click)="done()"
+                      class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      type="submit"
+                    >
+                      Submit Request
+                    </button>
+                  </div>
+                
+               
+              </mat-step>
+              
+            </mat-horizontal-stepper>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

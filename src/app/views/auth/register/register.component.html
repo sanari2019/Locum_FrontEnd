@@ -1,0 +1,244 @@
+
+<div class="container mx-auto px-4 h-full">
+    <div class="flex content-center items-center justify-center h-full">
+      <div class="w-full lg:w-6/12 px-4">
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
+        >
+          <div class="rounded-t mb-0 px-6 py-6">
+            <div class="text-center mb-3">
+              <h6 class="text-blueGray-500 text-sm font-bold">Sign up with credentials</h6>
+            </div>
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+          </div>
+          
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+            <div class="text-blueGray-400 text-center mb-3 font-bold">              
+              <!--<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+                {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+              </button>-->
+             
+
+            </div>
+            
+                <form novalidate (ngSubmit)="createAccount()" [formGroup]="firstFormGroup" class="mat-form">
+           
+                    <span class="text-danger" *ngIf="formHasErrors()">*Please fill in the required fields</span>
+                
+                  <div class="flex flex-wrap -mx-3 mb-3">
+                    <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+                      <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                        FirstName
+                      </label>
+                      <input
+                        type="text" formControlName="first_Name"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="First Name"
+                      />
+                      <span class="text-danger" *ngIf="firstFormGroup.get('first_Name')?.dirty && firstFormGroup.get('first_Name')?.hasError('required')">*Firstname is required</span>
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                      <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                        LastName
+                      </label>
+                      <input
+                        type="text" formControlName="last_Name"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Last Name"
+                      />
+                      <span class="text-danger" *ngIf="firstFormGroup.get('last_Name')?.dirty && firstFormGroup.get('last_Name')?.hasError('required')">*Lastname is required</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-wrap -mx-3 mb-3">
+                    <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+                        <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                            Locum Type
+                        </label>
+                        <mat-select required style="background: white;"placeholder="*Selecta a type" formControlName="locum_Type"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                        <mat-option  value="Internal">
+                            INTERNAL
+                          </mat-option>
+                          <mat-option  value="External">
+                            EXTERNAL
+                          </mat-option>
+                        </mat-select>
+                        <span class="text-danger" *ngIf="firstFormGroup.get('locum_Type')?.dirty && firstFormGroup.get('locum_Type')?.hasError('required')">*locum_Type is required</span>
+                    </div>
+
+                                
+                    <div class="w-full md:w-1/2 px-3">
+                      <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                        Department
+                      </label>
+                      <mat-select formControlName="department_id" required style="background: white;"placeholder="Department"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                        <mat-option *ngFor="let department of departments" [value]="department.id">
+                          {{ department.name }}
+                        </mat-option>
+                      </mat-select>
+                      <span class="text-danger" *ngIf="firstFormGroup.get('department')?.dirty && firstFormGroup.get('department')?.hasError('required')">*department is required</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-wrap -mx-3 mb-3">
+                    <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Phone Number
+                      </label>
+                      <input
+                        type="phone" formControlName="phone_Number"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Phone Number"
+                      />
+                      <span class="text-danger" *ngIf="firstFormGroup.get('phone_Number')?.dirty && firstFormGroup.get('phone_Number')?.hasError('required')">*phone_Number is required</span>
+                    </div>
+                    
+      
+        
+                    <div class="w-full md:w-1/2 px-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email" formControlName="email"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Email"
+                      />
+                      <span class="text-danger" *ngIf="firstFormGroup.get('email')?.dirty && firstFormGroup.get('email')?.hasError('required')">*Email address is required</span>
+                      <span class="text-danger" *ngIf="firstFormGroup.hasError('email','email')">*Email is Invalid</span>
+                    </div>
+                    
+                  </div>
+
+      
+                  <div class="flex flex-wrap -mx-3 mb-3">
+                    <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Password
+                      </label>
+                      <input
+                        type="password" formControlName="password"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Password"
+                      />
+                      <span class="text-danger" *ngIf="firstFormGroup.controls['password'].dirty && firstFormGroup.hasError('required','password')">*Password is required</span>
+                     <!-- <small id="emailHelp" class="form-text text-muted">Capitalize first letter, not less than 6 characters and a minimum of a number</small><br>
+                      <span class="text-danger" *ngIf="loginForm.get('email')?.dirty && loginForm.get('email')?.hasError('required')">*Email address is required</span>
+                      <span class="text-danger" *ngIf="loginForm.hasError('email','email')">*Email is Invalid</span>-->
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                      <label
+                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Confirm Password
+                      </label>
+                      <input
+                        type="password" formControlName="confirmPassword"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Password"
+                      />
+                      <span class="text-danger" *ngIf="firstFormGroup.get('confirmPassword')?.dirty && firstFormGroup.get('confirmPassword')?.hasError('required')">*Confirm Password is required</span>
+                      <span class="text-danger" *ngIf="firstFormGroup.hasError('passwordMismatch') && firstFormGroup.get('confirmPassword')?.dirty">*Passwords do not match</span>
+  
+                    </div>
+                  </div>
+
+                  <div class="rounded-t mb-0 px-6 py-6">
+                    <div class="text-center mb-3">
+                      <h6 class="text-blueGray-500 text-sm font-bold">Bank credentials</h6>
+                    </div>
+                    <hr class="mt-6 border-b-1 border-blueGray-300" />
+                  </div>
+
+                  <div class="flex flex-wrap -mx-3 mb-3">
+                    <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+                      <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                        Bank Name
+                      </label>
+                      <input
+                        type="text" formControlName="bank_Name"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="E.G, Guaranty Trust Bank"
+                      />
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                      <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                        Account Holder's Name
+                      </label>
+                      <input
+                        type="text" formControlName="holders_Name"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="E.G. Anari O. Samuel"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-wrap -mx-3 mb-3">
+                    <div class="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+                      <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                        Account Number
+                      </label>
+                      <input
+                        type="text" formControlName="account_Number"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="E.G. 0111234557"
+                      />
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                      <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                        Routing/ Sort Number
+                      </label>
+                      <input
+                        type="text" formControlName="sort_Code"
+                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Sort Code (if applicable)"
+                      />
+                    </div>
+                  </div>
+              
+                  <div>
+                    <label class="inline-flex items-center cursor-pointer">
+                      <input
+                        id="customCheckLogin"
+                        type="checkbox" formControlName="agree_Terms"
+                        class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
+                      />
+                      <span class="ml-2 text-sm font-semibold text-blueGray-600">
+                        I agree with the
+                        <a href="javascript:void(0)" class="text-red-600">
+                          Privacy Policy
+                        </a>
+                      </span>
+                    </label>
+                  </div>
+                  
+      
+                 
+      
+                  <div class="text-center mt-6">
+                    <button
+                      class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      type="submit" 
+                    >
+                      Create Account
+                    </button>
+                  </div>
+                </form>
+                
+           
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

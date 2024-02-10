@@ -1,0 +1,44 @@
+<table class="blueTable">
+    <thead>
+    <tr>
+      <th>Patient Name</th>
+      <th>UHID</th>
+      <!--<th>Validated</th>-->
+      <th></th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+    <td colspan="4">
+   
+    </tr>
+    </tfoot>
+    <tbody>
+    <tr *ngFor="let req of _requests">
+    <td>{{req.patient?.first_Name}}  {{req.patient?.last_Name}}</td>
+    <td>{{req.patient?.uhid}}</td>
+    <!--<td>
+      <ng-container *ngIf="patient.is_Validated; else notValidated">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>                  
+      </ng-container>
+      <ng-template #notValidated>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>                      
+      </ng-template> 
+    </td>-->
+    <td>
+      
+    </td>
+    
+    </tr>
+    <!--<tr *ngFor="let item of items">
+        <td>{{ item.firstName }} {{ patient.lastName }}</td>
+        <td>{{ item.uhid }}</td>
+        <td>{{ item.uhid }}</td>
+      </tr>-->
+    </tbody>
+  </table>
+  

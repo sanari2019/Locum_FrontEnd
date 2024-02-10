@@ -1,0 +1,41 @@
+<a
+  class="lg:text-black lg:hover:text-slate-200 text-slate-700 px-1 py-2 lg:py-2 flex items-center text-xs uppercase font-bold"
+  href="#pablo"
+  (click)="toggleDropdown($event)"
+  #btnDropdownRef
+>
+  <i class="fas fa-bell text-lg leading-lg"  matBadge="8" matBadgePosition="before" matBadgeColor="accent"></i>
+  <span class="lg:hidden inline-block ml-2">notification</span>
+</a>
+<div class="min-w-48 z-50" #popoverDropdownRef>
+  <div
+    class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1 min-w-48"
+    [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'"
+  >
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+    >
+      Action
+    </a>
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+    >
+      Another action
+    </a>
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+    >
+      Something else here
+    </a>
+    <div class="h-0 my-2 border border-solid border-slate-100"></div>
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+    >
+      Seprated link
+    </a>
+  </div>
+</div>

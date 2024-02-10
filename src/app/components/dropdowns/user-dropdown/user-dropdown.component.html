@@ -1,0 +1,62 @@
+<a
+  class="lg:text-black lg:hover:text-slate-200 text-slate-700 px-0 py-2 lg:py-2 block flex items-center text-xs uppercase font-bold"
+  href="#pablo"
+  (click)="toggleDropdown($event)"
+  #btnDropdownRef
+>
+  <div class="items-center flex">
+    <span
+      class="w-8 h-8 text-sm text-white bg-slate-200 inline-flex items-center justify-center rounded-full"
+    >
+      <img
+        alt="..."
+        class="w-full rounded-full align-middle border-none shadow-lg"
+        src="assets/img/team-1-800x800.jpg"
+      />
+    </span>
+  </div>
+  <span class="lg:hidden inline-block ml-2">Profile</span>
+</a>
+<div class="min-w-48 z-50" #popoverDropdownRef>
+  <div
+    class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1 min-w-48"
+    [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'"
+  >
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+    >
+      Action
+    </a>
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+    >
+      Another action
+    </a>
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+    >
+      Something else here
+    </a>
+    <div class="h-0 my-2 border border-solid border-slate-100"></div>
+    <a
+      href="#pablo"
+      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
+    >
+      Seprated link
+    </a>
+    <div class="h-0 my-2 border border-solid border-slate-100"></div>
+    <a class="flex items-center">
+        <button
+        routerLink='/auth/login'
+          class="bg-red-600 text-white active:bg-red-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+          type="button"
+        >
+       <!--   <i class="fas fa-arrow-alt-circle-down"></i> Login-->
+       Logout
+        </button>
+    </a>
+  </div>
+</div>

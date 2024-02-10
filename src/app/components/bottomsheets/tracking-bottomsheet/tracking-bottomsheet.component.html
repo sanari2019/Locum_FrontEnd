@@ -1,0 +1,29 @@
+<mat-tab-group>
+  <mat-tab label="Pending">
+    <mat-nav-list  *ngFor="let request of requests">
+      <a href="https://keep.google.com/" mat-list-item>
+
+        <!--<span matLine>{{ request.dateEntered | date }}, {{ request.shift.name }}></span>
+        <span matLine><a style="color:blue">View Details</a></span>
+        <span matListItemTitle *ngIf="request.cnoApprovalId === 3 && request.supApprovalId === 3">Pending, no approval given</span>
+        <span matListItemTitle *ngIf="request.supApprovalId === 2 && request.cnoApprovalId === 3">Awaiting CNO approval</span>-->
+    
+      </a>
+    
+    
+    
+  </mat-nav-list>
+  </mat-tab>
+  <mat-tab label="Approved">
+    <mat-nav-list  *ngFor="let drequest of drequests">
+      <a href="https://keep.google.com/" mat-list-item>
+
+       <!-- <span matLine>{{ drequest.dateEntered | date }}, {{ drequest.shiftId }}</span>
+        <span matListItemTitle *ngIf="drequest.cnoApprovalId === 3 && drequest.supApprovalId === 3">Pending, no approval given</span>
+        <span matListItemTitle *ngIf="drequest.supApprovalId === 2 && drequest.cnoApprovalId === 3">Awaiting CNO approval</span>
+        <span matLine>{{ drequest.patientFirstName }} {{ drequest.patientLastName }}</span>-->
+    
+      </a>
+  </mat-nav-list>
+  </mat-tab>
+</mat-tab-group>
