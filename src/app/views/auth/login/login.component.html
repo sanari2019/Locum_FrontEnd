@@ -26,7 +26,7 @@
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Email"
                 />
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small><br>
+                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--><br>
                 <span class="text-danger" *ngIf="loginForm.get('email')?.dirty && loginForm.get('email')?.hasError('required')">*Email address is required</span>
                 <span class="text-danger" *ngIf="loginForm.hasError('email','email')">*Email is Invalid</span>
               </div>
@@ -58,6 +58,12 @@
                   </span>
                 </label>
               </div>
+
+              
+                  <!-- Display unauthorized message -->
+            <div *ngIf="unauthorizedMessage" class="text-red-600 text-center mb-3">
+              {{ unauthorizedMessage }}
+            </div>
   
               <div class="text-center mt-6">
                 <button [disabled]="!loginForm.valid"
@@ -72,7 +78,7 @@
         </div>
         <div class="flex flex-wrap mt-6 relative">
           <div class="w-1/2">
-            <a href="javascript:void(0)" class="text-blueGray-200">
+            <a [routerLink]="['/auth/forgot-password']" class="text-blueGray-200">
               <small>Forgot password?</small>
             </a>
           </div>

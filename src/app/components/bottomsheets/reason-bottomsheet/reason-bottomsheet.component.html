@@ -39,13 +39,13 @@
                       class="block uppercase text-slate-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Reason*
+                      Reason
                     </label>
                     <textarea
                       type="text" formControlName="reason" rows="4"
                       class="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Reason"
-                    ></textarea>
+                    required></textarea>
                     <span class="text-danger" *ngIf="firstFormGroup.get('reason')?.dirty && firstFormGroup.get('reason')?.hasError('required')">*A reason is required</span>
                     <span class="text-danger" *ngIf="firstFormGroup.hasError('reason','reason')">*Reason is Invalid</span>
                   </div>
@@ -61,9 +61,9 @@
                   <div class="text-center mt-6">
                     <button
                       class="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button" 
+                      type="Submit" 
                     >
-                      Complete
+                      Submit
                     </button>
                   </div>
                 </form>

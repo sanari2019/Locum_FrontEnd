@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
@@ -28,14 +28,22 @@ export class AuthService {
             localStorage.setItem('token', response.token);
             localStorage.setItem('user', response.user.id);
           }
-
-        },
-          error => {
-            // Handle login error, log or display a user-friendly message
-            console.error('Login failed:', error);
-          })
+        }),
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = 'An error occurred during login.';
+          if (error.status === 401) {
+            errorMessage = error.error.message || 'Invalid email or password.';
+          }
+          // Handle the error, log or display the error message
+          console.error(errorMessage);
+          return throwError(() => errorMessage);
+        })
       );
   }
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/ForgotPassword`, { email });
+  }
+
 
   logout(): void {
     localStorage.removeItem("token");

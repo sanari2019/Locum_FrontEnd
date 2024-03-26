@@ -22,6 +22,10 @@ import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { AuthGuard } from './services/auth/auth.guard';
 import { PatientDetailsComponent } from './components/dialogs/patient-details/patient-details.component';
+import { RequestComponent } from './views/locum/request/request.component';
+import { TrackingComponent } from './views/locum/tracking/tracking.component';
+import { LocumComponent } from './layouts/locum/locum.component';
+import { ForgotPasswordComponent } from './views/auth/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   // admin views
@@ -45,14 +49,35 @@ const routes: Routes = [
     children: [
       { path: "login", component: LoginComponent },
       { path: "register", component: RegisterComponent },
+      { path: "forgot-password", component: ForgotPasswordComponent },
       { path: "", redirectTo: "login", pathMatch: "full" },
+    ],
+  },
+  {
+    path: "",
+    component: LocumComponent,
+    canActivate: [AuthGuard],
+    children: [
+      // { path: "request", component: RequestComponent },
+      { path: "track", component: TrackingComponent },
+      { path: "", redirectTo: "track", pathMatch: "full" },
+    ],
+  },
+  {
+    path: "locum",
+    component: LocumComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: "request", component: RequestComponent },
+      { path: "track", component: TrackingComponent },
+      { path: "", redirectTo: "track", pathMatch: "full" },
     ],
   },
   // no layout views
   { path: "profile", component: ProfileComponent },
   { path: "landing", component: LandingComponent },
   // { path: "", component: IndexComponent, canActivate: [AuthGuard] },
-  { path: "", component: IndexComponent },
+  // { path: "", component: IndexComponent },
   { path: "**", redirectTo: "", pathMatch: "full" },
 ];
 

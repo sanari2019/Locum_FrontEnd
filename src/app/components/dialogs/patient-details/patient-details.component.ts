@@ -31,9 +31,9 @@ export class PatientDetailsComponent implements OnInit {
     this.requestService.getRequestsByRequestId(this.data.approval_Request_Id).subscribe(requests => {
       this._requests = requests;
     })
-    this.approvalService.getApprovalById(this.data.id).subscribe(request => {
-      this.request = request;
-    })
+    // this.approvalService.getApprovalById(this.data.approval_Request_Id).subscribe(request => {
+    //   this.request = request;
+    // })
     console.log('Received requests data:', this.data.approval_Request_Id)
 
   }

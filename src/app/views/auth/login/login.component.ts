@@ -15,6 +15,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class LoginComponent implements OnInit {
   public loginForm !: FormGroup;
   public loginObj = new User();
+  unauthorizedMessage: string = '';
   constructor(private jwtHelper: JwtHelperService, private fb: FormBuilder, private http: HttpClient, private router: Router, private userService: UserService, private authService: AuthService) { };
 
 
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
         error => {
           // Handle login error (display error message, etc.)
           console.error('Login error:', error);
+          this.unauthorizedMessage = error;
         }
       );
     }

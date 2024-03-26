@@ -15,6 +15,8 @@ import { RequestData } from 'src/app/models/models/requestData.model';
 import { RequestFormData } from 'src/app/models/models/requestFormData.model';
 import { RequestFormPatient } from 'src/app/models/models/requestFormPatient.model';
 import { RequestFormPatientService } from 'src/app/services/requestFormPatient.service';
+import { ValidatedPatient } from 'src/app/models/models/validatedpatient.model';
+import { ValidatedPatientService } from 'src/app/services/validated-patient.service';
 
 @Component({
   selector: 'app-request-bottomsheet',
@@ -41,7 +43,8 @@ export class RequestBottomsheetComponent {
   requestformPatient!: RequestFormPatientService;
   use!: number;
   requestFormData!: RequestFormData;
-  constructor(private requestFormPatientService: RequestFormPatientService, private patientService: PatientService, private userService: UserService, private requestmainService: RequestMainService, private departmentService: DepartmentService, private shiftService: ShiftService, private _bottomSheetRef: MatBottomSheetRef<RequestBottomsheetComponent>, private _formBuilder: UntypedFormBuilder, private router: Router) {
+  isPatientValidated: boolean = false;
+  constructor(private validatepatientService: ValidatedPatientService, private requestFormPatientService: RequestFormPatientService, private patientService: PatientService, private userService: UserService, private requestmainService: RequestMainService, private departmentService: DepartmentService, private shiftService: ShiftService, private _bottomSheetRef: MatBottomSheetRef<RequestBottomsheetComponent>, private _formBuilder: UntypedFormBuilder, private router: Router) {
     this.secondFormGroup = this._formBuilder.group({
       // Form control initialization
       // For example:
@@ -166,12 +169,13 @@ export class RequestBottomsheetComponent {
 
           const request = new ApprovalRequest();
           requestData.approvalrequest.entered_By_User_Id = this.user?.id;
-          requestData.approvalrequest.department_Id = firstCtrlValue;
+          requestData.approvalrequest.ward_id = firstCtrlValue;
           request.date_Entered = new Date();
           requestData.approvalrequest.shift_Id = firstCtrl2Value;
           requestData.approvalrequest.status = "Pending";
           requestData.approvalrequest.approval_Level = 2;
           // localStorage.removeItem('requestFormData');
+          // this.validatepatientService.getValidatedPatient()
           this.patientService.createPatient(requestData).subscribe(res => {
             alert(" Validation SuccessFul");
             this.fetchValidatedPatients(this.user?.id);

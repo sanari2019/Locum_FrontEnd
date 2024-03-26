@@ -129,6 +129,7 @@ export class IndexComponent implements OnInit {
       } else {
         console.log('not')
         valid = false;
+        this.logOut();
       }
     }
     return valid;

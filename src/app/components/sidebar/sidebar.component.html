@@ -1,3 +1,4 @@
+<app-spinner></app-spinner>
 <nav
   class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
 >
@@ -68,7 +69,13 @@
           />
         </div>
       </form>
-
+            <!-- Divider -->
+      <hr class="my-4 md:min-w-full" />
+      
+      <h2 class="md:block text-left  text-blue-900 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold px-0" *ngIf="isUserAuthenticated()">
+        <i class="fas fa-home text-blueGray-300 mr-2 text-sm"></i>
+        Welcome {{user?.first_Name}}
+      </h2>
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />
       <!-- Heading -->
@@ -145,7 +152,7 @@
           </a>
         </li>
 
-        <li class="items-center">
+<!--        <li class="items-center">
           <a
             [routerLink]="['/admin/tables']"
             class="text-xs uppercase py-3 font-bold block"
@@ -188,6 +195,7 @@
             Maps
           </a>
         </li>
+        -->
       </ul>
 
       <!-- Divider -->
@@ -196,63 +204,58 @@
       <h6
         class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
       >
-        Auth Layout Pages
+        Locum Layout Pages
       </h6>
       <!-- Navigation -->
 
       <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
         <li class="items-center">
           <a
-            [routerLink]="['/auth/login']"
+            [routerLink]="['/locum/request']"
             class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #req="routerLinkActive"
+            [ngClass]="
+              req.isActive
+                ? 'text-green-600 hover:text-green-700'
+                : 'text-blueGray-700 hover:text-blueGray-500'
+            "
           >
             <i class="fas fa-fingerprint text-blueGray-300 mr-2 text-sm"></i>
-            Login
+            Request
           </a>
         </li>
 
         <li class="items-center">
           <a
-            [routerLink]="['/auth/register']"
+            [routerLink]="['/locum/track']"
             class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #track="routerLinkActive"
+            [ngClass]="
+              track.isActive
+                ? 'text-green-600 hover:text-green-700'
+                : 'text-blueGray-700 hover:text-blueGray-500'
+            "
           >
             <i class="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>
-            Register
+            Track
+          </a>
+        </li>
+        <hr>
+
+        <li class="items-center">
+          <a
+            (click)="logout()"
+            class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+          >
+            <i class="fas fa-power-off text-blueGray-300 mr-2 text-sm"></i>
+            Logout
           </a>
         </li>
       </ul>
 
-      <!-- Divider -->
-      <hr class="my-4 md:min-w-full" />
-      <!-- Heading -->
-      <h6
-        class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
-      >
-        No Layout Pages
-      </h6>
-      <!-- Navigation -->
-
-      <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-        <li class="items-center">
-          <a
-            [routerLink]="['/landing']"
-            class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-          >
-            <i class="fas fa-newspaper text-blueGray-300 mr-2 text-sm"></i>
-            Landing Page
-          </a>
-        </li>
-
-        <li class="items-center">
-          <a
-            [routerLink]="['/profile']"
-            class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-          >
-            <i class="fas fa-user-circle text-blueGray-300 mr-2 text-sm"></i>
-            Profile Page
-          </a>
-        </li>
-      </ul>
+    
 
      
     </div>

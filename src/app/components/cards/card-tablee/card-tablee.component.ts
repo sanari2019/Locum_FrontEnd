@@ -238,7 +238,8 @@ export class CardTableeComponent implements OnInit {
 
     const dialogRef = this.dialog.open(PatientDetailsComponent, {
       // width: this.isLoading$ ? '500px' : '100%',
-      height: 'auto',
+      height: '50%',
+      width: '50%',
       // panelClass: this.isLoading$ ? 'dialog-fullscreen' : '',
       data: { approval_Request_Id: approval_Request_Id, id: id },
       // disableClose: this.isLoading$ ? true : false,

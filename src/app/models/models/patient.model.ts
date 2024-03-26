@@ -3,6 +3,8 @@ export class Patient {
     first_Name: string;
     last_Name: string;
     uhid: string;
+    wardName: string;
+    roomNo: string;
     is_Validated: boolean;
     created_at: Date;
 
@@ -11,6 +13,8 @@ export class Patient {
         this.first_Name = "";
         this.last_Name = "";
         this.uhid = "";
+        this.wardName = "";
+        this.roomNo = "";
         this.is_Validated = false;
         this.created_at = new Date;
     }

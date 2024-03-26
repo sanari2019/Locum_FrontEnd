@@ -60,7 +60,7 @@ import { ReasonBottomsheetComponent } from './components/bottomsheets/reason-bot
 import { CardBiComponent } from './components/cards/card-bi/card-bi.component';
 import { PersonalDetailsComponent } from './components/forms/personal-details/personal-details.component';
 import { BankDetailsComponent } from './components/forms/bank-details/bank-details.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
@@ -68,9 +68,21 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { DetailsComponent } from './components/bottomsheets/details/details.component';
 import { PatientDetailsComponent } from './components/dialogs/patient-details/patient-details.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { TrackingComponent } from './components/dialogs/tracking/tracking/tracking.component';
+// import { TrackingComponent } from './components/dialogs/tracking/tracking/tracking.component';
 import { CardTableeComponent } from './components/cards/card-tablee/card-tablee.component';
 import { RequestDialogComponent } from './components/dialogs/request-dialog/request-dialog.component';
+import { SuccessmessageComponent } from './components/notmess/successmessage/successmessage.component';
+import { RequestComponent } from './views/locum/request/request.component';
+import { LocumComponent } from './layouts/locum/locum.component';
+import { TrackingComponent } from './views/locum/tracking/tracking.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { ForgotPasswordComponent } from './views/auth/forgot-password/forgot-password.component';
+
 
 
 
@@ -126,6 +138,11 @@ import { RequestDialogComponent } from './components/dialogs/request-dialog/requ
     PatientDetailsComponent,
     TrackingComponent,
     RequestDialogComponent,
+    SuccessmessageComponent,
+    RequestComponent,
+    LocumComponent,
+    SpinnerComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -137,6 +154,7 @@ import { RequestDialogComponent } from './components/dialogs/request-dialog/requ
     MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatChipsModule,
     MatListModule,
     FormsModule,
     ReactiveFormsModule,
@@ -149,6 +167,10 @@ import { RequestDialogComponent } from './components/dialogs/request-dialog/requ
     MatTabsModule,
     MatBottomSheetModule,
     MatBadgeModule,
+    MatDatepickerModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('token'),
@@ -159,6 +181,11 @@ import { RequestDialogComponent } from './components/dialogs/request-dialog/requ
   ],
   exports: [JwtModule],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

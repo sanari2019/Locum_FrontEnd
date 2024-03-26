@@ -14,6 +14,9 @@ import { RequestFormPatient } from 'src/app/models/models/requestFormPatient.mod
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { PatientDetailsComponent } from '../../dialogs/patient-details/patient-details.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SuccessmessageComponent } from '../../notmess/successmessage/successmessage.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-table',
@@ -41,7 +44,7 @@ export class CardTableComponent implements OnInit {
   _requests: ApprovalRequest[] = [];
   username: string = '';
 
-  constructor(private emptypeservice: EmpTypeService, private approvalService: ApprovalService, private _bottomSheet: MatBottomSheet, private requestService: RequestMainService, private userService: UserService, private dialog: MatDialog) { }
+  constructor(private router: Router, private _snackBar: MatSnackBar, private emptypeservice: EmpTypeService, private approvalService: ApprovalService, private _bottomSheet: MatBottomSheet, private requestService: RequestMainService, private userService: UserService, private dialog: MatDialog) { }
   openBottomSheet1(): void {
     this._bottomSheet.open(ReasonBottomsheetComponent);
   }
@@ -177,26 +180,38 @@ export class CardTableComponent implements OnInit {
   // }
 
   approveRequest(approvals: Approval) {
-    const user = localStorage.getItem('user')
-    // if (!approvals) {
-    //   alert('Please select request(s) first.');
-    //   return;
-    // }
-    // this.approvalService.getApprovals();
+    const user = localStorage.getItem('user');
 
+    // Check if the user is logged in
     if (user) {
-      // const approval = new Approval();
-      const userId = JSON.parse(user);
-      this.approvalService.UpdateDeclineandRequest(approvals, userId).subscribe(() => {
-        // this.approval = result;
+      // Prompt the user with an alert
+      const confirmation = confirm('Are you sure you want to approve this request?');
 
-        // this.approval.approvedByUserId = r
-      })
-      this.loadRequests();
+      // If the user confirms
+      if (confirmation) {
+        const userId = JSON.parse(user);
 
+        // Call the approval service to update approval and request
+        this.approvalService.UpdateApprovalandRequest(approvals, userId).subscribe(() => {
+          // Show a success message
+          this.openSnackBar("Submitted Succesful", "Close");
 
+          // Navigate to the admin approval page
+          this.router.navigate(['/admin/approval']);
+
+          // Refresh the data
+          this.ngOnInit();
+          this.loadRequests();
+        });
+      }
     }
+  }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+    this._snackBar.openFromComponent(SuccessmessageComponent, {
+      duration: 3000
+    })
   }
 
 
@@ -205,10 +220,19 @@ export class CardTableComponent implements OnInit {
       data: { approval: approvals }
     });
 
+
+
     dialogRef.afterDismissed().subscribe((reason: string) => {
       console.log('The bottom sheet was closed with reason:', reason);
       // Perform any actions based on the reason if needed
+
+      // Navigate to the admin approval page
+      this.router.navigate(['/admin/approval']);
+      this.loadRequests();
+      this.ngOnInit();
     });
+    this.loadRequests();
+    this.ngOnInit();
 
   }
 
@@ -261,8 +285,8 @@ export class CardTableComponent implements OnInit {
   viewDetails(approval_Request_Id: number) {
 
     const dialogRef = this.dialog.open(PatientDetailsComponent, {
-      // width: this.isLoading$ ? '500px' : '100%',
-      // height: this.isLoading$ ? 'auto' : '100%',
+      width: '50%',
+      height: '50%',
       // panelClass: this.isLoading$ ? 'dialog-fullscreen' : '',
       data: { approval_Request_Id: approval_Request_Id },
       // disableClose: this.isLoading$ ? true : false,

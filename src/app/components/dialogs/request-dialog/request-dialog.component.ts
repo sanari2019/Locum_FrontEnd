@@ -168,7 +168,7 @@ export class RequestDialogComponent {
 
           const request = new ApprovalRequest();
           requestData.approvalrequest.entered_By_User_Id = this.user?.id;
-          requestData.approvalrequest.department_Id = firstCtrlValue;
+          requestData.approvalrequest.ward_id = firstCtrlValue;
           request.date_Entered = new Date();
           requestData.approvalrequest.shift_Id = firstCtrl2Value;
           requestData.approvalrequest.status = "Pending";

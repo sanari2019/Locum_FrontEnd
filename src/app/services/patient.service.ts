@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
 import { User } from '../models/auth/user.model';
 import { RequestData } from '../models/models/requestData.model';
+import { ValidatedPatient } from '../models/models/validatedpatient.model';
 
 @Injectable({
     providedIn: 'root',
@@ -28,8 +29,8 @@ export class PatientService {
         return this.http.get<Patient[]>(`${this.apiUrl}/validatedpatients/${enteredByUserId}`);
     }
 
-    createPatient(request: RequestData): Observable<Patient> {
-        return this.http.post<Patient>(`${this.apiUrl}`, request);
+    createPatient(request: RequestData): Observable<ValidatedPatient> {
+        return this.http.post<ValidatedPatient>(`${this.apiUrl}`, request);
     }
 
     updatePatient(patient: Patient): Observable<void> {

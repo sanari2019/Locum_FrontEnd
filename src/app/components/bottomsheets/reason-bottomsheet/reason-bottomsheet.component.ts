@@ -4,6 +4,8 @@ import { UntypedFormGroup, UntypedFormBuilder, FormBuilder, FormGroup, Validator
 import { ActivatedRoute, Router } from '@angular/router';
 import { Approval } from 'src/app/models/models/approval.model';
 import { ApprovalService } from 'src/app/services/approval.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SuccessmessageComponent } from 'src/app/components/notmess/successmessage/successmessage.component';
 
 
 @Component({
@@ -12,16 +14,24 @@ import { ApprovalService } from 'src/app/services/approval.service';
   styleUrls: ['./reason-bottomsheet.component.css']
 })
 export class ReasonBottomsheetComponent {
-  constructor(private approvalService: ApprovalService, private _bottomSheetRef: MatBottomSheetRef<ReasonBottomsheetComponent>, private fb: UntypedFormBuilder, private router: Router, @Inject(MAT_BOTTOM_SHEET_DATA) public data: { approval: Approval }) {
+  constructor(private _snackBar: MatSnackBar, private approvalService: ApprovalService, private _bottomSheetRef: MatBottomSheetRef<ReasonBottomsheetComponent>, private fb: UntypedFormBuilder, private router: Router, @Inject(MAT_BOTTOM_SHEET_DATA) public data: { approval: Approval }) {
 
     this.uhids.push({ uhid0: '' });
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+    this._snackBar.openFromComponent(SuccessmessageComponent, {
+      duration: 3000
+    })
+  }
+
 
   openLink(event: MouseEvent): void {
-    this._bottomSheetRef.dismiss();
+    this._bottomSheetRef.dismiss(this.firstFormGroup.get('reason')?.value);
     event.preventDefault();
   }
+
 
 
 
@@ -70,8 +80,10 @@ export class ReasonBottomsheetComponent {
         this.data.approval.decline_Reason = this.firstFormGroup.get('reason')?.value;
         this.approvalService.UpdateDeclineandRequest(this.data.approval, userId).subscribe(() => {
           // this.approval = result;
-
-
+          // this.dialogRef.close();
+          this.openSnackBar("Submitted Succesful", "Close");
+          this._bottomSheetRef.dismiss();
+          this.router.navigate(['/admin/approval']);
           // this.approval.approvedByUserId = r
         }, error => {
           // Handle error
